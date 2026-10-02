@@ -1,0 +1,566 @@
+/* ========================================
+   METAMORPHOSIS — VISOR DE GUÍA
+   acceso.html
+   ======================================== */
+
+body.is-guide {
+    background: #030304;
+    overflow: hidden;
+}
+
+body.is-locked {
+    overflow: hidden;
+}
+
+.guide-shell {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+}
+
+/* ========================================
+   VIEWPORT
+   ======================================== */
+.guide-viewport {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    outline: none;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(168, 189, 212, 0.05), transparent 70%),
+        #030304;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================
+   STAGE
+   ======================================== */
+.guide-stage {
+    --zoom: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* ========================================
+   PÁGINA
+   Cada página ocupa toda la pantalla (fill)
+   ======================================== */
+.guide-page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 68px 12px 84px;
+    margin: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    overflow: hidden;
+}
+
+/* con zoom la página ya no debe ser "snap" de pantalla completa */
+.guide-stage.is-zoomed .guide-page {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 78px 20px 96px;
+    scroll-snap-align: none;
+    overflow: visible;
+}
+
+.guide-viewport.is-zoomed {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+}
+
+.guide-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 3px;
+    background: #0a0a0d;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 24px 60px -20px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transition: opacity 0.45s var(--ease);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.guide-img.is-loading {
+    opacity: 0.35;
+}
+
+.guide-page.is-loaded .guide-img {
+    opacity: 1;
+}
+
+/* con zoom la imagen usa su tamaño real escalado */
+.guide-stage.is-zoomed .guide-img {
+    width: calc(1200px * var(--zoom));
+    height: calc(1698px * var(--zoom));
+    max-width: none;
+    object-fit: fill;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.07),
+        0 30px 80px -24px rgba(0, 0, 0, 0.95);
+}
+
+.guide-caption {
+    position: absolute;
+    bottom: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--text-faint);
+    pointer-events: none;
+    user-select: none;
+}
+
+.guide-stage.is-zoomed .guide-caption {
+    display: none;
+}
+
+/* ========================================
+   BOOT
+   ======================================== */
+.guide-boot {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: #030304;
+    z-index: 5;
+    font-family: var(--font-display);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--text-faint);
+    transition: opacity 0.5s var(--ease), visibility 0.5s var(--ease);
+}
+
+.guide-boot.is-done {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.guide-boot-bar {
+    width: 120px;
+    height: 1px;
+    background: var(--line-strong);
+    overflow: hidden;
+    position: relative;
+}
+
+.guide-boot-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    animation: bootSlide 1.1s var(--ease) infinite;
+}
+
+@keyframes bootSlide {
+    0%   { transform: scaleX(0); }
+    60%  { transform: scaleX(1); }
+    100% { transform: scaleX(1); opacity: 0; }
+}
+
+/* ========================================
+   CHROME SUPERIOR
+   ======================================== */
+.guide-chrome {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: rgba(6, 6, 8, 0.82);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-bottom: 1px solid var(--line);
+    transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+    padding-top: env(safe-area-inset-top);
+}
+
+.guide-chrome.is-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.guide-chrome-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 14px;
+}
+
+.guide-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+}
+
+.guide-brand-name {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.guide-brand-sub {
+    font-family: var(--font-display);
+    font-size: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--text-faint);
+}
+
+.guide-chrome-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.guide-zoom-label {
+    font-family: var(--font-display);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    min-width: 38px;
+    text-align: center;
+    user-select: none;
+}
+
+.guide-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    color: var(--text-dim);
+    transition: color 0.2s, background 0.2s;
+}
+
+.guide-icon-btn:hover:not(:disabled) {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.guide-icon-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+.guide-icon-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ========================================
+   PROGRESO
+   ======================================== */
+.guide-progress {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.guide-progress-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.4s var(--ease);
+}
+
+/* ========================================
+   NAV INFERIOR
+   ======================================== */
+.guide-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    align-items: stretch;
+    gap: 1px;
+    background: rgba(6, 6, 8, 0.82);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-top: 1px solid var(--line);
+    transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.guide-chrome.is-hidden ~ .guide-nav {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.guide-nav-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 52px;
+    font-family: var(--font-display);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    transition: color 0.2s, background 0.2s;
+}
+
+.guide-nav-btn:hover:not(:disabled) {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.guide-nav-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+.guide-nav-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.guide-nav-center {
+    flex: 0 0 auto;
+    padding: 0 22px;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    color: var(--text-faint);
+}
+
+/* ========================================
+   FIN
+   ======================================== */
+.guide-finish {
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 24px;
+    background:
+        radial-gradient(ellipse 70% 50% at 50% 50%, rgba(168, 189, 212, 0.07), transparent 70%),
+        rgba(3, 3, 4, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    animation: fadeIn 0.5s var(--ease);
+}
+
+.guide-finish[hidden] {
+    display: none;
+}
+
+.guide-finish-inner {
+    text-align: center;
+    max-width: 420px;
+}
+
+.guide-finish-label {
+    font-family: var(--font-display);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--text-faint);
+    margin-bottom: 14px;
+}
+
+.guide-finish-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 28px;
+}
+
+.guide-finish-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.guide-finish-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 26px;
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.guide-finish-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-dim);
+}
+
+.guide-finish-btn.is-primary {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+.guide-finish-btn.is-primary:hover {
+    opacity: 0.88;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ========================================
+   PANEL LATERAL
+   ======================================== */
+.guide-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    width: min(300px, 84vw);
+    padding: calc(14px + env(safe-area-inset-top)) 0 calc(18px + env(safe-area-inset-bottom));
+    background: var(--bg-soft);
+    border-left: 1px solid var(--line-strong);
+    box-shadow: -24px 0 60px -30px rgba(0, 0, 0, 0.9);
+    transform: translateX(100%);
+    transition: transform 0.4s var(--ease);
+    overflow-y: auto;
+}
+
+.guide-panel.is-open {
+    transform: translateX(0);
+}
+
+.guide-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px 14px;
+    border-bottom: 1px solid var(--line);
+}
+
+.guide-panel-title {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    color: var(--text-dim);
+}
+
+.guide-panel-list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.guide-panel-list a {
+    display: flex;
+    align-items: center;
+    padding: 13px 16px;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    color: var(--text-dim);
+    transition: color 0.2s, background 0.2s, padding-left 0.25s var(--ease);
+}
+
+.guide-panel-list a:hover {
+    color: var(--text);
+    background: var(--accent-dim);
+    padding-left: 22px;
+}
+
+.guide-panel-sep {
+    height: 1px;
+    background: var(--line);
+    margin: 6px 0;
+}
+
+.guide-panel-note {
+    padding: 14px 16px 0;
+    font-size: 0.65rem;
+    line-height: 1.6;
+    color: var(--text-faint);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (min-width: 768px) {
+    .guide-chrome-row {
+        height: 62px;
+        padding: 0 22px;
+    }
+
+    .guide-page {
+        padding: 86px 40px 96px;
+    }
+
+    .guide-caption {
+        bottom: 72px;
+    }
+
+    .guide-finish-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+/* en pantallas anchas la página queda centrada con margen */
+@media (min-width: 1200px) {
+    .guide-page {
+        padding: 96px 64px 104px;
+    }
+}

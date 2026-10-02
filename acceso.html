@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Tu guía — Metamorphosis</title>
+    <meta name="description" content="Tu guía Metamorphosis está desbloqueada. Lee las 67 páginas online.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#060608">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/guide.css">
+</head>
+<body class="is-guide">
+
+    <!-- ========================================
+         VISOR
+    ======================================== -->
+    <div class="guide-shell">
+
+        <div class="guide-viewport" id="guideViewport" tabindex="0">
+            <div class="guide-stage" id="guideStage"></div>
+
+            <div class="guide-boot" id="guideBoot">
+                <div class="guide-boot-bar"></div>
+                <span>CARGANDO GUÍA…</span>
+            </div>
+        </div>
+
+        <!-- ========================================
+             CHROME SUPERIOR
+        ======================================== -->
+        <header class="guide-chrome" id="guideChrome">
+            <div class="guide-chrome-row">
+                <button class="guide-icon-btn" id="guideBack" type="button" aria-label="Volver al inicio">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+                </button>
+
+                <div class="guide-brand">
+                    <span class="guide-brand-name">METAMORPHOSIS</span>
+                    <span class="guide-brand-sub">GUÍA · <span id="guideCounter">1</span>/<span id="guideTotal">67</span></span>
+                </div>
+
+                <div class="guide-chrome-actions">
+                    <button class="guide-icon-btn" id="guideZoomOut" type="button" aria-label="Alejar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>
+                    </button>
+                    <span class="guide-zoom-label" id="guideZoomLabel">100%</span>
+                    <button class="guide-icon-btn" id="guideZoomIn" type="button" aria-label="Acercar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                    <button class="guide-icon-btn" id="guidePanelsBtn" type="button" aria-label="Opciones" aria-expanded="false" aria-controls="guidePanel">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="guide-progress" role="progressbar" aria-label="Progreso de lectura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span class="guide-progress-fill" id="guideBar"></span>
+            </div>
+        </header>
+
+        <!-- ========================================
+             NAVEGACIÓN INFERIOR
+        ======================================== -->
+        <nav class="guide-nav" id="guideNav" aria-label="Navegación de la guía">
+            <button class="guide-nav-btn" id="guidePrev" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+                <span>ANTERIOR</span>
+            </button>
+
+            <button class="guide-nav-btn guide-nav-center" id="guideToggleChrome" type="button">
+                <span>PÁGINAS</span>
+            </button>
+
+            <button class="guide-nav-btn" id="guideNext" type="button">
+                <span>SIGUIENTE</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </nav>
+
+        <!-- ========================================
+             CIERRE
+        ======================================== -->
+        <div class="guide-finish" id="guideFinish" hidden>
+            <div class="guide-finish-inner">
+                <p class="guide-finish-label">FIN DE LA GUÍA</p>
+                <h2 class="guide-finish-title">AHORA APLICA.</h2>
+                <div class="guide-finish-actions">
+                    <a href="index.html" class="guide-finish-btn">VOLVER AL INICIO</a>
+                    <a href="Gracias.html" class="guide-finish-btn is-primary">AGRADECER</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================
+             PANEL LATERAL
+        ======================================== -->
+        <aside class="guide-panel" id="guidePanel" aria-hidden="true" aria-label="Opciones de la guía">
+            <div class="guide-panel-head">
+                <span class="guide-panel-title">OPCIONES</span>
+                <button class="guide-icon-btn" id="guideClosePanel" type="button" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
+            </div>
+
+            <nav class="guide-panel-list">
+                <a href="#page-1" data-jump="1">Portada</a>
+                <a href="#page-8" data-jump="8">Índice</a>
+                <a href="#page-15" data-jump="15">Rutina</a>
+                <a href="#page-30" data-jump="30">Peinado</a>
+                <a href="#page-45" data-jump="45">Ropa</a>
+                <a href="#page-60" data-jump="60">Presencia</a>
+            </nav>
+
+            <div class="guide-panel-sep"></div>
+
+            <div class="guide-panel-list">
+                <a href="index.html">Volver al inicio</a>
+            </div>
+        </aside>
+
+    </div>
+
+    <script src="js/guide.js"></script>
+</body>
+</html>

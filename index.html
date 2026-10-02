@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Metamorphosis — Sistema de Transformación Personal</title>
+    <meta name="description" content="Un sistema de 67 páginas para transformar tu apariencia de forma intencional: piel, cabello, físico, estilo y presencia.">
+    <meta name="theme-color" content="#060608">
+    <meta name="author" content="Metamorphosis">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Metamorphosis — Sistema de Transformación Personal">
+    <meta property="og:description" content="Un sistema de 67 páginas para transformar tu apariencia de forma intencional.">
+    <meta property="og:image" content="assets/1.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="assets/1.jpeg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/access.css">
+</head>
+<body>
+
+    <!-- ========================================
+         NAVEGACIÓN
+    ======================================== -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">METAMORPHOSIS</a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#idea" class="nav-link"><span class="nav-num">01</span> LA IDEA</a>
+                <a href="#process" class="nav-link"><span class="nav-num">02</span> PROCESO</a>
+                <a href="#explore" class="nav-link"><span class="nav-num">03</span> ÁREAS</a>
+                <button type="button" class="nav-link nav-link-btn" data-open-access>
+                    <span class="nav-num">04</span> ACCESO
+                </button>
+            </div>
+
+            <a href="#access" class="nav-cta" data-open-access>START</a>
+
+            <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         HERO
+    ======================================== -->
+    <header class="hero" id="hero">
+        <div class="hero-atmosphere">
+            <div class="hero-glow"></div>
+            <div class="hero-grid"></div>
+            <div class="hero-noise"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-status">
+                <span class="status-dot"></span>
+                <span class="status-text">SISTEMA ACTIVO</span>
+            </div>
+
+            <h1 class="hero-title">METAMORPHOSIS</h1>
+
+            <p class="hero-subtitle">UN SISTEMA PARA<br>LA TRANSFORMACIÓN PERSONAL.</p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-num">67</span>
+                    <span class="hero-stat-label">PÁGINAS</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">04</span>
+                    <span class="hero-stat-label">FASES</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">06</span>
+                    <span class="hero-stat-label">ÁREAS</span>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <button type="button" class="hero-cta" data-open-access>
+                    OBTENER LA GUÍA <span class="cta-arrow">→</span>
+                </button>
+                <a href="#process" class="hero-cta hero-cta-ghost">VER PROCESO</a>
+            </div>
+        </div>
+
+        <div class="hero-meta">
+            <span class="hero-meta-item">01 / TRANSFORMACIÓN</span>
+            <span class="hero-meta-item">02 / EVOLUCIÓN</span>
+            <span class="hero-meta-item">03 / DISCIPLINA</span>
+        </div>
+    </header>
+
+    <!-- ========================================
+         01 / LA IDEA
+    ======================================== -->
+    <section class="section" id="idea">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">01</span>
+                <span class="label-text">LA IDEA</span>
+            </div>
+            <div class="idea-content">
+                <p class="idea-text">
+                    Lookmaxing no se trata de convertirse en otra persona.<br>
+                    Se trata de entender lo que tienes,<br>
+                    mejorar lo que puedes,<br>
+                    y ser intencional con cómo te presentas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         02 / TRANSFORMACIÓN
+    ======================================== -->
+    <section class="section" id="transformacion">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">02</span>
+                <span class="label-text">TRANSFORMACIÓN</span>
+            </div>
+            <div class="transform-editorial">
+                <div class="transform-item transform-before">
+                    <span class="transform-tag">ANTES</span>
+                    <img src="assets/2.jpeg" alt="Estado inicial" class="transform-img" loading="lazy" decoding="async">
+                </div>
+                <div class="transform-item transform-after">
+                    <span class="transform-tag">DESPUÉS</span>
+                    <img src="assets/1.jpeg" alt="Estado final" class="transform-img" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         GALERÍA
+    ======================================== -->
+    <section class="section" id="galeria">
+        <div class="container">
+            <div class="gallery-editorial">
+                <img src="assets/3.jpeg" alt="Detalle 1" class="gallery-img gallery-img-1" loading="lazy" decoding="async">
+                <img src="assets/4.jpeg" alt="Detalle 2" class="gallery-img gallery-img-2" loading="lazy" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         03 / EL PROCESO
+    ======================================== -->
+    <section class="section" id="process">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">03</span>
+                <span class="label-text">EL PROCESO</span>
+            </div>
+            <div class="process-vertical">
+                <div class="process-step">
+                    <span class="step-num">01</span>
+                    <div class="step-content">
+                        <h3 class="step-name">IDENTIFY</h3>
+                        <p class="step-desc">Conoce tus puntos fuertes y aquello que puedes mejorar.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <span class="step-num">02</span>
+                    <div class="step-content">
+                        <h3 class="step-name">IMPROVE</h3>
+                        <p class="step-desc">Construye mejores hábitos y cuida tu apariencia.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <span class="step-num">03</span>
+                    <div class="step-content">
+                        <h3 class="step-name">REFINE</h3>
+                        <p class="step-desc">Perfecciona detalles: estilo, cabello, piel y presencia.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <span class="step-num">04</span>
+                    <div class="step-content">
+                        <h3 class="step-name">EVOLVE</h3>
+                        <p class="step-desc">Mantén los cambios y desarrolla tu propia identidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         04 / ÁREAS
+    ======================================== -->
+    <section class="section" id="explore">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">04</span>
+                <span class="label-text">ÁREAS</span>
+            </div>
+            <div class="areas-list">
+                <button type="button" class="area-item" data-open-access>
+                    <span class="area-num">01</span>
+                    <span class="area-name">SKIN</span>
+                    <span class="area-desc">Cuidado y limpieza</span>
+                    <span class="area-arrow">→</span>
+                </button>
+                <button type="button" class="area-item" data-open-access>
+                    <span class="area-num">02</span>
+                    <span class="area-name">HAIR</span>
+                    <span class="area-desc">Encuentra tu estilo</span>
+                    <span class="area-arrow">→</span>
+                </button>
+                <button type="button" class="area-item" data-open-access>
+                    <span class="area-num">03</span>
+                    <span class="area-name">PHYSIQUE</span>
+                    <span class="area-desc">Construye tu físico</span>
+                    <span class="area-arrow">→</span>
+                </button>
+                <button type="button" class="area-item" data-open-access>
+                    <span class="area-num">04</span>
+                    <span class="area-name">STYLE</span>
+                    <span class="area-desc">Viste mejor</span>
+                    <span class="area-arrow">→</span>
+                </button>
+                <button type="button" class="area-item" data-open-access>
+                    <span class="area-num">05</span>
+                    <span class="area-name">PRESENCE</span>
+                    <span class="area-desc">Mejora tu presencia</span>
+                    <span class="area-arrow">→</span>
+                </button>
+                <button type="button" class="area-item" data-open-access>
+                    <span class="area-num">06</span>
+                    <span class="area-name">HABITS</span>
+                    <span class="area-desc">Rutinas que transforman</span>
+                    <span class="area-arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         05 / LOS DETALLES
+    ======================================== -->
+    <section class="section" id="details">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">05</span>
+                <span class="label-text">LOS DETALLES</span>
+            </div>
+            <div class="details-list">
+                <div class="detail-row">
+                    <span class="detail-num">01</span>
+                    <h3 class="detail-name">SKIN</h3>
+                    <p class="detail-desc">Tu piel es lo primero que ven. Cuídala.</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-num">02</span>
+                    <h3 class="detail-name">HAIR</h3>
+                    <p class="detail-desc">Un buen corte cambia completamente tu rostro.</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-num">03</span>
+                    <h3 class="detail-name">STYLE</h3>
+                    <p class="detail-desc">Tu apariencia también es comunicación.</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-num">04</span>
+                    <h3 class="detail-name">PHYSIQUE</h3>
+                    <p class="detail-desc">Tu físico es la base de tu presencia.</p>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-num">05</span>
+                    <h3 class="detail-name">PRESENCE</h3>
+                    <p class="detail-desc">La postura y la actitud lo son todo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         06 / DATOS
+    ======================================== -->
+    <section class="section" id="data">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">06</span>
+                <span class="label-text">DATOS</span>
+            </div>
+            <div class="data-grid">
+                <div class="data-item">
+                    <span class="data-num">01</span>
+                    <span class="data-name">FOUNDATION</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-num">02</span>
+                    <span class="data-name">CONSISTENCY</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-num">03</span>
+                    <span class="data-name">REFINEMENT</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-num">04</span>
+                    <span class="data-name">PROGRESS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         07 / MOTIVACIÓN
+    ======================================== -->
+    <section class="section motivacion" id="motivacion">
+        <div class="container">
+            <h2 class="motivacion-title">TU MEJOR VERSIÓN<br>SE CONSTRUYE.</h2>
+            <p class="motivacion-sub">Pequeños cambios.<br>Repetidos con consistencia.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         08 / ACCESO
+    ======================================== -->
+    <section class="section" id="access">
+        <div class="container">
+            <div class="section-label">
+                <span class="label-num">07</span>
+                <span class="label-text">ACCESO</span>
+            </div>
+
+            <div class="access-block">
+                <h2 class="access-title">ACCEDE AL SISTEMA</h2>
+                <p class="access-sub">67 páginas · 6 áreas · 4 fases</p>
+
+                <button type="button" class="btn-access" data-open-access>
+                    OBTENER LA GUÍA <span class="btn-arrow">→</span>
+                </button>
+
+                <p class="access-note">
+                    <span id="currentOption">1</span> de 5 nodos por revisar
+                </p>
+
+                <p class="ad-note" id="adNotice"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TUTORIAL
+    ======================================== -->
+    <section class="section" id="tutorial">
+        <div class="container">
+            <div class="tutorial-block">
+                <span class="tutorial-label">¿NECESITAS AYUDA?</span>
+                <p class="tutorial-text">Aprende cómo funciona el acceso en 3 pasos.</p>
+                <button type="button" class="btn-tutorial" id="tutorialBtn">
+                    VER TUTORIAL <span class="btn-arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PANEL DE ACCESO
+    ======================================== -->
+    <div class="access-overlay" id="accessOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+        <div class="overlay-card">
+            <button type="button" class="overlay-close" id="accessClose" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+
+            <span class="overlay-eyebrow">ACCESO SEGURO</span>
+
+            <h2 class="overlay-title" id="accessTitle">REVISA LOS 5 NODOS</h2>
+            <p class="overlay-text">
+                Abre los cinco nodos, uno a uno. Cada nodo se marca solo una vez,
+                así que no tendrás que repetir ninguno.
+            </p>
+
+            <div class="access-nodes" id="accessNodes"></div>
+
+            <p class="access-progress" id="accessProgressText">0 de 5 nodos revisados</p>
+
+            <p class="access-notice" id="accessNotice"></p>
+
+            <div class="overlay-error" id="accessError">
+                <p class="overlay-text" id="accessErrorText">
+                    No pudimos abrir la pestaña. Pulsa el enlace directo.
+                </p>
+                <a href="#" id="accessErrorLink" class="overlay-fallback" target="_blank" rel="noopener noreferrer">
+                    ABRIR ENLACE DIRECTO →
+                </a>
+            </div>
+
+            <a href="acceso.html" class="overlay-continue" id="accessContinue">
+                CONTINUAR A LA GUÍA <span class="btn-arrow">→</span>
+            </a>
+
+            <button type="button" class="overlay-retry" id="accessRetry">
+                REINTENTAR
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         MODAL TUTORIAL
+    ======================================== -->
+    <div class="tutorial-modal" id="tutorialModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+        <div class="tutorial-card">
+            <button type="button" class="overlay-close" id="tutorialClose" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+
+            <span class="overlay-eyebrow">CÓMO FUNCIONA</span>
+            <h2 class="overlay-title" id="tutorialTitle">ACCESO EN 3 PASOS</h2>
+
+            <ol class="tutorial-steps">
+                <li class="tutorial-step">
+                    <span class="tutorial-step-num">01</span>
+                    <div>
+                        <h3>Abre el nodo que toque</h3>
+                        <p>Hay 5 nodos y se recorren uno a uno. Solo el primero está disponible; los demás se van desbloqueando.</p>
+                    </div>
+                </li>
+                <li class="tutorial-step">
+                    <span class="tutorial-step-num">02</span>
+                    <div>
+                        <h3>Vuelve y sigue con el siguiente</h3>
+                        <p>El enlace se abre en una pestaña nueva. Al volver, ese nodo queda marcado y te toca el siguiente.</p>
+                    </div>
+                </li>
+                <li class="tutorial-step">
+                    <span class="tutorial-step-num">03</span>
+                    <div>
+                        <h3>Lee tu guía</h3>
+                        <p>Con los 5 nodos revisados se desbloquean las 67 páginas para leer online.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <button type="button" class="overlay-retry" data-close-tutorial>ENTENDIDO</button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <h2 class="footer-logo">METAMORPHOSIS</h2>
+                <p class="footer-tagline">A SYSTEM FOR PERSONAL TRANSFORMATION.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#idea" class="footer-link"><span class="footer-num">01</span> IDEA</a>
+                <a href="#process" class="footer-link"><span class="footer-num">02</span> PROCESO</a>
+                <a href="#explore" class="footer-link"><span class="footer-num">03</span> ÁREAS</a>
+                <a href="#" class="footer-link" data-open-access><span class="footer-num">04</span> GUÍA</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Metamorphosis. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
