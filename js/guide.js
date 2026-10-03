@@ -8,6 +8,16 @@
 
     var STORAGE_KEY = 'metamorphosis_progress';
     var PRELOAD_AHEAD = 2;
+    // Un enlace en los bloques 1, 2, 6 y 7; dos enlaces en los bloques 3, 4 y 5.
+    var SECTION_GATES = [
+        { id: '5-10', from: 5, to: 10, urls: ['https://cuty.io/Jeanrox'] },
+        { id: '11-20', from: 11, to: 20, urls: ['https://cuty.io/gracias456'] },
+        { id: '21-27', from: 21, to: 27, urls: ['https://cuty.io/gracias4879', 'https://cuty.io/gracias1548'] },
+        { id: '28-31', from: 28, to: 31, urls: ['https://cuty.io/gracias48765', 'https://cuty.io/gracias97946'] },
+        { id: '32-38', from: 32, to: 38, urls: ['https://cuty.io/gracias14785', 'https://cuty.io/gracias74125'] },
+        { id: '39-45', from: 39, to: 45, urls: ['https://cuty.io/gracias36985'] },
+        { id: '46-52', from: 46, to: 52, urls: ['https://cuty.io/gracias10000'] }
+    ];
 
     // Debe coincidir con guia-pages/index.json. Si añades o quitas páginas,
     // regenera con: node js/extract-pages.js
@@ -52,6 +62,73 @@
        PÁGINAS
        ======================================== */
 
+    function gateFor(page) {
+        for (var i = 0; i < SECTION_GATES.length; i++) if (page >= SECTION_GATES[i].from && page <= SECTION_GATES[i].to) return SECTION_GATES[i];
+        return null;
+    }
+    function gateIsOpen(gate) {
+        var ranges = getStorage().unlockedRanges;
+        return !gate || (Array.isArray(ranges) && ranges.indexOf(gate.id) !== -1);
+    }
+    function showGate(gate) {
+        var box = document.getElementById('sectionGate');
+        if (!box) {
+            box = document.createElement('div');
+            box.id = 'sectionGate';
+            box.className = 'section-gate';
+            box.innerHTML = '<div class="section-gate-card"><span class="section-gate-kicker">METAMORPHOSIS · ACCESO</span><h2></h2><p class="section-gate-progress"></p><div class="section-gate-links"></div><button type="button" class="section-gate-close">VOLVER A LA GUÍA</button></div>';
+            document.body.appendChild(box);
+            box.addEventListener('click', function (event) { if (event.target === box) box.classList.remove('is-open'); });
+        }
+        var close = box.querySelector('.section-gate-close');
+        box.querySelector('h2').textContent = 'Páginas ' + gate.from + '–' + gate.to;
+        var state = getStorage();
+        state.openedGateLinks = state.openedGateLinks || {};
+        var opened = Array.isArray(state.openedGateLinks[gate.id]) ? state.openedGateLinks[gate.id] : [];
+        var list = box.querySelector('.section-gate-links');
+        var progress = box.querySelector('.section-gate-progress');
+        list.textContent = '';
+        function updateProgress() {
+            progress.textContent = gateIsOpen(gate)
+                ? 'Bloque desbloqueado. Ya puedes continuar.'
+                : 'Abre los ' + gate.urls.length + ' ' + (gate.urls.length === 1 ? 'enlace' : 'enlaces') + ' para desbloquear este bloque (' + opened.length + ' de ' + gate.urls.length + ').';
+            close.textContent = gateIsOpen(gate) ? 'ENTRAR AL BLOQUE →' : 'VOLVER A LA GUÍA';
+        }
+        gate.urls.forEach(function (url, index) {
+            var link = document.createElement('a');
+            link.className = 'section-gate-link';
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = opened.indexOf(index) !== -1 ? 'ENLACE ' + (index + 1) + ' · ABIERTO ✓' : 'ABRIR ENLACE ' + (index + 1) + ' ↗';
+            if (opened.indexOf(index) !== -1) {
+                link.classList.add('is-done');
+                link.setAttribute('aria-disabled', 'true');
+            }
+            link.addEventListener('click', function (event) {
+                if (opened.indexOf(index) !== -1) { event.preventDefault(); return; }
+                opened.push(index);
+                state.openedGateLinks[gate.id] = opened;
+                if (opened.length >= gate.urls.length) {
+                    state.unlockedRanges = Array.isArray(state.unlockedRanges) ? state.unlockedRanges : [];
+                    if (state.unlockedRanges.indexOf(gate.id) === -1) state.unlockedRanges.push(gate.id);
+                }
+                setStorage(state);
+                link.textContent = 'ENLACE ' + (index + 1) + ' · ABIERTO ✓';
+                link.classList.add('is-done');
+                link.setAttribute('aria-disabled', 'true');
+                updateProgress();
+                if (gateIsOpen(gate)) setTimeout(function () { box.classList.remove('is-open'); goTo(gate.from); }, 300);
+            });
+            list.appendChild(link);
+        });
+        close.onclick = function () {
+            box.classList.remove('is-open');
+            if (gateIsOpen(gate)) goTo(gate.from);
+        };
+        updateProgress();
+        box.classList.add('is-open');
+    }
     function pageUrl(page) {
         return 'guia-pages/page-' + String(page).padStart(3, '0') + '.jpg';
     }
@@ -94,6 +171,8 @@
     function loadPage(i) {
         var figure = el.pages[i - 1];
         if (!figure) return;
+        var gate = gateFor(i);
+        if (!gateIsOpen(gate)) return;
 
         var img = figure.querySelector('.guide-img');
         if (!img || img.getAttribute('src')) return;
@@ -137,6 +216,8 @@
 
     function goTo(page, behavior) {
         var target = Math.min(TOTAL_PAGES, Math.max(1, page));
+        var requestedGate = gateFor(target);
+        if (!gateIsOpen(requestedGate)) { showGate(requestedGate); return; }
 
         if (target === current && el.pages[target - 1]) {
             el.pages[target - 1].scrollIntoView({ block: 'start', behavior: behavior || 'auto' });
@@ -194,7 +275,9 @@
        ZOOM
        ======================================== */
 
-    var ZOOM_STEPS = [1, 1.5, 2, 3];
+    // Las páginas están a 1200 px de ancho. Por encima del 200% la imagen
+// solo se estira y se ve borrosa, así que ahí se para el zoom.
+var ZOOM_STEPS = [1, 1.5, 2];
 
     function setZoom(level) {
         zoom = level;
@@ -252,6 +335,12 @@
             var rect = figures[i].getBoundingClientRect();
             if (rect.bottom > viewportTop + 40 && rect.top < viewportTop + el.viewport.clientHeight - 40) {
                 var pageNum = i + 1;
+                var gate = gateFor(pageNum);
+                if (!gateIsOpen(gate)) {
+                    el.pages[gate.from - 1].scrollIntoView({ block: 'start', behavior: 'auto' });
+                    showGate(gate);
+                    return;
+                }
                 if (pageNum !== current) {
                     current = pageNum;
                     loadWindow(current);
@@ -369,26 +458,11 @@
        ======================================== */
 
     /* ========================================
-   CONTROL DE ACCESO
-   Sin esto, quien entre directo a acceso.html
-   se salta los nodos de acceso.
-   Para revisar la guía sin pasar por el acceso:
-   acceso.html?preview=1
+   CONTROL DE ACCESO POR BLOQUES
+   Las páginas abiertas no requieren enlace.
    ======================================== */
 
-function requireAccess() {
-        try {
-            var params = new URLSearchParams(window.location.search);
-            if (params.get('preview') === '1') return true;
-        } catch (e) {
-            /* navegador muy antiguo: sigue el flujo normal */
-        }
-
-        if (getStorage().unlocked === true) return true;
-
-        window.location.replace('index.html');
-        return false;
-    }
+function requireAccess() { return true; }
 
     function init() {
         if (!requireAccess()) return;
@@ -420,6 +494,8 @@ function requireAccess() {
         var state = getStorage();
         var startAt = parseInt(state.lastPage, 10);
         current = isNaN(startAt) ? 1 : Math.min(TOTAL_PAGES, Math.max(1, startAt));
+        var savedGate = gateFor(current);
+        if (!gateIsOpen(savedGate)) current = 1;
 
         loadWindow(current);
         setZoom(1);

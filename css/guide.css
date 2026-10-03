@@ -564,3 +564,19 @@ body.is-locked {
         padding: 96px 64px 104px;
     }
 }
+.section-gate { position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center; padding:22px; background:rgba(4,5,12,.78); backdrop-filter:blur(14px); }
+.section-gate.is-open { display:flex; }
+.section-gate-card { width:min(440px,100%); padding:clamp(28px,7vw,46px); border:1px solid rgba(167,139,250,.32); border-radius:26px; text-align:center; background:radial-gradient(ellipse at 100% 0,rgba(103,232,249,.13),transparent 50%),#121321; box-shadow:0 28px 100px rgba(0,0,0,.5); }
+.section-gate-kicker { color:#c4b5fd; font-size:.68rem; letter-spacing:.18em; }
+.section-gate-card h2 { margin:15px 0 10px; color:#fff; font-size:clamp(1.7rem,7vw,2.3rem); }
+.section-gate-card p { margin:0 0 24px; color:#b6b8cc; line-height:1.65; }
+.section-gate-link,.section-gate-close { display:block; width:100%; padding:15px 18px; border-radius:999px; font-weight:700; letter-spacing:.06em; }
+.section-gate-link { color:#fff; background:linear-gradient(110deg,#8b5cf6,#6366f1); }
+.section-gate-link[aria-disabled="true"] { opacity:.55; cursor:not-allowed; }
+.section-gate-close { margin-top:10px; border:1px solid rgba(255,255,255,.16); color:#ddd; }
+/* Acceso por bloques con contraste monocromático */
+.section-gate-card { border-color:rgba(255,255,255,.2); background:radial-gradient(ellipse at 100% 0,rgba(255,255,255,.07),transparent 50%),#111; }
+.section-gate-kicker { color:#eee; }
+.section-gate-link { margin-top:9px; color:#111; background:linear-gradient(135deg,#f5f5f5,#c6c6c6); }
+.section-gate-link.is-done { color:#eee; background:#292929; border:1px solid #555; }
+.section-gate-close { color:#ddd; }
