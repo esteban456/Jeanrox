@@ -1505,3 +1505,11 @@ body { background:radial-gradient(ellipse at 80% 6%,rgba(255,255,255,.055),trans
 .consultation-number { color:#f2f2f2; font-size:.95rem; font-weight:600; letter-spacing:.04em; }
 .consultation-button { padding:12px 17px; border-radius:999px; background:#f2f2f2; color:#090909; font-size:.63rem; font-weight:700; letter-spacing:.1em; }
 @media(max-width:480px) { .consultation-contact { width:100%; padding-left:14px; gap:8px; } .consultation-number { font-size:.84rem; } .consultation-button { padding:11px 13px; font-size:.58rem; } }
+/* Tutorial de acceso, visible antes de abrir la guía */
+.access-tutorial { width:min(100%,560px); margin:26px 0 4px; padding:17px; border:1px solid rgba(255,255,255,.14); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); }
+.access-tutorial-heading { margin-bottom:12px; }
+.access-tutorial-kicker { color:#a7a7a7; font-size:.58rem; font-weight:700; letter-spacing:.16em; }
+.access-tutorial-heading h2 { margin-top:5px; color:#f5f5f5; font-family:var(--font-display); font-size:clamp(1.05rem,2.4vw,1.35rem); font-weight:600; letter-spacing:-.035em; }
+.access-tutorial-heading p { margin-top:3px; color:#aaa; font-size:.76rem; line-height:1.55; }
+.access-tutorial-video { display:block; width:100%; aspect-ratio:16/9; border:1px solid rgba(255,255,255,.1); border-radius:13px; background:#000; object-fit:contain; }
+@media(max-width:760px) { .access-tutorial { margin:22px 0 2px; padding:13px; text-align:left; } }
