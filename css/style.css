@@ -1513,3 +1513,25 @@ body { background:radial-gradient(ellipse at 80% 6%,rgba(255,255,255,.055),trans
 .access-tutorial-heading p { margin-top:3px; color:#aaa; font-size:.76rem; line-height:1.55; }
 .access-tutorial-video { display:block; width:100%; aspect-ratio:16/9; border:1px solid rgba(255,255,255,.1); border-radius:13px; background:#000; object-fit:contain; }
 @media(max-width:760px) { .access-tutorial { margin:22px 0 2px; padding:13px; text-align:left; } }
+/* Apoyo voluntario */
+.support-card { padding:clamp(28px,6vw,64px); border:1px solid rgba(255,255,255,.15); border-radius:26px; background:radial-gradient(ellipse at 95% 0,rgba(255,255,255,.07),transparent 44%),linear-gradient(145deg,#151515,#090909); }
+.support-kicker,.support-method { color:#aaa; font-size:.62rem; font-weight:700; letter-spacing:.17em; }
+.support-card h2 { margin-top:16px; color:#f5f5f5; font-family:var(--font-display); font-size:clamp(1.9rem,5.8vw,3.5rem); letter-spacing:-.06em; line-height:1; }
+.support-card > p:not(.support-copy-status) { max-width:600px; margin-top:16px; color:#b8b8b8; line-height:1.7; }
+.support-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:28px; }
+.support-option { display:flex; flex-direction:column; align-items:flex-start; gap:14px; min-width:0; padding:22px; border:1px solid rgba(255,255,255,.12); border-radius:18px; background:rgba(255,255,255,.035); }
+.support-value { max-width:100%; color:#f5f5f5; font-size:clamp(.9rem,2vw,1.05rem); overflow-wrap:anywhere; }
+.support-copy { padding:10px 14px; border:1px solid rgba(255,255,255,.22); border-radius:999px; color:#eee; font-size:.6rem; font-weight:700; letter-spacing:.1em; transition:background .2s,color .2s; }
+.support-copy:hover { background:#f2f2f2; color:#080808; }
+.support-copy-status { min-height:1.3em; margin-top:12px; color:#ccc; font-size:.78rem; }
+@media(max-width:600px) { .support-options { grid-template-columns:1fr; } .support-option { padding:18px; } }
+/* Marcas PayPal y Nequi en un solo tono */
+.support-brand { display:flex; align-items:center; gap:10px; min-height:38px; color:#f4f4f4; }
+.support-brand svg { display:block; width:36px; height:36px; flex:none; overflow:visible; }
+.support-brand > span { font-family:Arial, sans-serif; font-size:1.2rem; font-weight:700; letter-spacing:-.035em; }
+.paypal-brand > span { font-style:italic; }
+.paypal-mark-back,.paypal-mark-front { font-family:Arial, sans-serif; font-size:35px; font-weight:800; font-style:italic; fill:#888; }
+.paypal-mark-front { fill:#fff; }
+.nequi-brand > span { letter-spacing:-.06em; }
+.nequi-mark-outline { fill:none; stroke:#f4f4f4; stroke-width:2.3; stroke-linejoin:round; }
+.nequi-mark-letter { fill:#f4f4f4; }
