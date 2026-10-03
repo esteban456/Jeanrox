@@ -40,6 +40,23 @@ function initNavbar() {
         });
     }
 }
+function initSupportCopy() {
+    var status = document.querySelector('.support-copy-status');
+    document.querySelectorAll('[data-copy-value]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var value = button.getAttribute('data-copy-value');
+            if (!navigator.clipboard || !navigator.clipboard.writeText) {
+                if (status) status.textContent = 'Copia el dato directamente desde la tarjeta.';
+                return;
+            }
+            navigator.clipboard.writeText(value).then(function () {
+                if (status) status.textContent = 'Dato copiado.';
+            }).catch(function () {
+                if (status) status.textContent = 'No se pudo copiar. Selecciona el dato manualmente.';
+            });
+        });
+    });
+}
 function initAccess() {
     document.querySelectorAll('[data-open-access]').forEach(function (control) {
         control.addEventListener('click', function (event) {
@@ -130,6 +147,7 @@ function initTutorial() {
 document.addEventListener('DOMContentLoaded', function () {
     initNavbar();
     initAccess();
+    initSupportCopy();
     initReveal();
     initTutorial();
 });

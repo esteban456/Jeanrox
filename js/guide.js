@@ -386,10 +386,22 @@ var ZOOM_STEPS = [1, 1.5, 2];
             });
         });
 
+        el.stage.addEventListener('contextmenu', function (event) {
+            if (event.target.closest && event.target.closest('.guide-img')) event.preventDefault();
+        });
+        el.stage.addEventListener('dragstart', function (event) {
+            if (event.target.closest && event.target.closest('.guide-img')) event.preventDefault();
+        });
+        el.stage.addEventListener('copy', function (event) { event.preventDefault(); });
+
         var scrollEl = el.viewport;
         scrollEl.addEventListener('scroll', onScroll, { passive: true });
 
         document.addEventListener('keydown', function (ev) {
+            if ((ev.ctrlKey || ev.metaKey) && ['s', 'u'].indexOf(ev.key.toLowerCase()) !== -1) {
+                ev.preventDefault();
+                return;
+            }
             if (ev.key === 'Escape' && el.panel.classList.contains('is-open')) {
                 closePanel();
                 return;
